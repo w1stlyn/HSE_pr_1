@@ -1,0 +1,17 @@
+#!/bin/bash
+idir=$1
+odir=$2
+fl=$(find $idir -type f)
+for file in $fl
+    do 
+    name=${file##*/}
+    if [ -f "${odir}/${name}" ]; then
+        i=1
+        while [ -f "${odir}/${name}.${i}" ]; do
+            let i+=1
+        done
+        cp "$file" "${odir}/${name}.${i}"
+    else
+        cp "$file" "$odir"
+    fi
+done
